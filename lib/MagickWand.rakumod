@@ -109,6 +109,16 @@ method write(Str $file-name) returns Bool {
   return MagickWriteImage( $.handle, $file-name ) == MagickTrue;
 }
 
+method write-image(Str $file-name) returns Bool {
+  die "No wand handle defined!" unless $.handle.defined;
+  return MagickWriteImage( $.handle, $file-name ) == MagickTrue;
+}
+
+method write-images(Str $file-name, Bool $adjoin) returns Bool {
+  die "No wand handle defined!" unless $.handle.defined;
+  return MagickWriteImages( $.handle, $file-name, $adjoin.Int) == MagickTrue;
+}
+
 method crop(Int $x, Int $y, Int $width, Int $height) returns Bool {
   die "No wand handle defined!" unless $.handle.defined;
   return MagickCropImage($.handle, $width, $height, $x, $y) == MagickTrue;
